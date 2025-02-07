@@ -4,26 +4,31 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import Test from "./Test";
-import { BrowserRouter as Router,Routes, Route, Link, NavLink, Navigate } from 'react-router-dom';
+import Error from "./Error";
+import { BrowserRouter as Neel,Routes, Route, Link, NavLink, Navigate } from 'react-router-dom';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <>    
-    <Router>
-      <Test/>
+    Test
+    <Neel>
+     Nabbar
+     Sidebar
     <Routes>
     <Route path="/" element={<Test/>} />
-    <Route path="/react" element={<>React</>} />
-    <Route path="/node" element={<>node</>} />
+    <Route path="/react/:restro_name" element={<>React Dynamic routing</>} />
+    <Route path="/react/sub/details" element={<>React</>} />
+    <Route path="/error" element={<Error/>}/>
     <Route path="/link" element={<><Link to="/">Home</Link></>} />
     <Route path="/navlink" element={<><NavLink to="/link">NavLink</NavLink></>} />
-    <Route path="/*" element={<><Navigate to="/node" /></>} />
-
+    <Route path="/*" element={<><Navigate to="/error" /></>} />
+    {/* useHistory */}
     {/* <App /> */}
     {/* <Test /> */}
     </Routes>
+    Footer
 
-    </Router>
+    </Neel>
 
   </>
 );
