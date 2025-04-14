@@ -7,6 +7,7 @@ const AuthButtons = () => {
 
   return (
     <div className="auth-buttons">
+      {console.log(loginWithRedirect)}
       {isAuthenticated ? (
         <button
           onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}

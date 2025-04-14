@@ -8,11 +8,11 @@ const Profile = () => {
   if (isLoading) {
     return <div>Loading...</div>;
   }
-
+  console.log(user)
   return (
     isAuthenticated && (
       <div>
-        <h2>Welcome, {user.name}</h2>
+        <h2>Welcome, {user.name}</h2> 
         <p>Email: {user.email}</p>
         <img src={user.picture} alt={user.name} />
       </div>
