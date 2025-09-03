@@ -832,17 +832,361 @@ response:- {
 42. Find companies where stock < 10.
 Ans:- 
 
-code:-  
-response: - 
+code:-  db.companies.find({"salaryBand.stock":{$lt : 10}});
+response: - _id: ObjectId('68b6cd01b511a8b8d376c441'),
+  name: 'Netflix',
+  location: 'Mumbai',
+  salaryBand: {
+    base: 50,
+    stock: 1
+  },
+  hiringCriteria: {
+    cgpa: 7,
+    skills: [
+      'Java',
+      'DSA',
+      'Microservices'
+    ],
+    experience: '2-4 years'
+  },
+  interviewRounds: [
+    {
+      round: 1,
+      type: 'Technical'
+    },
+    {
+      round: 2,
+      type: 'System Design'
+    },
+    {
+      round: 3,
+      type: 'Managerial'
+    }
+  ],
+  benefits: [
+    'Stock Options',
+    'Free Streaming',
+    'WFH'
+  ],
+  employeeCount: 800
+
 43. Find companies with bonus > 5 AND stock > 10.
+Ans:- 
+
+code - db.companies.find({"salaryBand.bonus": {$gt : 5}} && {"salaryBand.stock": {$gt:10}});
+
+response -{
+  _id: ObjectId('68b6cd01b511a8b8d376c43d'),
+  name: 'Amazon',
+  location: 'Hyderabad',
+  salaryBand: {
+    base: 28,
+    stock: 14
+  },
+  hiringCriteria: {
+    cgpa: 7,
+    skills: [
+      'DSA',
+      'OS',
+      'C++'
+    ],
+    experience: '0-2 years'
+  },
+  interviewRounds: [
+    {
+      round: 1,
+      type: 'OA'
+    },
+    {
+      round: 2,
+      type: 'DSA Interview'
+    },
+    {
+      round: 3,
+      type: 'System Design'
+    }
+  ],
+  benefits: [
+    'WFH',
+    'Stock Options',
+    'Free Snacks'
+  ],
+  employeeCount: 5000
+}..
+
+
 44. Find companies with base >= 30 OR stock >= 12.
+Ans:- 
+
+code- db.companies.find({
+  $or: [
+    { "salaryBand.base": { $gte: 30 } },
+    { "salaryBand.stock": { $gte: 12 } }
+  ]
+});
+response-
+
+
 45. Find companies NOT requiring "OS".
+Ans:- 
+
+code - db.companies.find({"hiringCriteria.skills":{$ne:"os"}});
+response -{
+  _id: ObjectId('68b6cd01b511a8b8d376c43c'),
+  name: 'Google',
+  location: 'Bangalore',
+  salaryBand: {
+    base: 32,
+    stock: 10
+  },
+  hiringCriteria: {
+    cgpa: 7.5,
+    skills: [
+      'DSA',
+      'System Design',
+      'Java',
+      'Python'
+    ],
+    experience: '0-2 years'
+  },
+  interviewRounds: [
+    {
+      round: 1,
+      type: 'Online Assessment'
+    },
+    {
+      round: 2,
+      type: 'Technical Interview'
+    },
+    {
+      round: 3,
+      type: 'Managerial Interview'
+    },
+    {
+      round: 4,
+      type: 'HR Round'
+    }
+  ],
+  benefits: [
+    'Relocation',
+    'WFH',
+    'Health Insurance'
+  ],
+  isTopTier: true,
+  employeeCount: 2000
+}.........
+
 46. Find companies requiring at least one skill from \["Java", "C++"].
+
+Ans:-
+code - db.companies.find({"hiringCriteria.skills":{$in:["Java","c++"]}}); 
+response:- {
+  _id: ObjectId('68b6cd01b511a8b8d376c43c'),
+  name: 'Google',
+  location: 'Bangalore',
+  salaryBand: {
+    base: 32,
+    stock: 10
+  },
+  hiringCriteria: {
+    cgpa: 7.5,
+    skills: [
+      'DSA',
+      'System Design',
+      'Java',
+      'Python'
+    ],
+    experience: '0-2 years'
+  },
+  interviewRounds: [
+    {
+      round: 1,
+      type: 'Online Assessment'
+    },
+    {
+      round: 2,
+      type: 'Technical Interview'
+    },
+    {
+      round: 3,
+      type: 'Managerial Interview'
+    },
+    {
+      round: 4,
+      type: 'HR Round'
+    }
+  ],
+  benefits: [
+    'Relocation',
+    'WFH',
+    'Health Insurance'
+  ],
+  isTopTier: true,
+  employeeCount: 2000
+}
+
+
 47. Find companies requiring BOTH "DSA" and "System Design".
+Ans:-
+
+code:- db.companies.find({"hiringCriteria.skills":{$in:["DSA","System Design"]}});
+response:- {
+  _id: ObjectId('68b6cd01b511a8b8d376c43c'),
+  name: 'Google',
+  location: 'Bangalore',
+  salaryBand: {
+    base: 32,
+    stock: 10
+  },
+  hiringCriteria: {
+    cgpa: 7.5,
+    skills: [
+      'DSA',
+      'System Design',
+      'Java',
+      'Python'
+    ],
+    experience: '0-2 years'
+  },
+  interviewRounds: [
+    {
+      round: 1,
+      type: 'Online Assessment'
+    },
+    {
+      round: 2,
+      type: 'Technical Interview'
+    },
+    {
+      round: 3,
+      type: 'Managerial Interview'
+    },
+    {
+      round: 4,
+      type: 'HR Round'
+    }
+  ],
+  benefits: [
+    'Relocation',
+    'WFH',
+    'Health Insurance'
+  ],
+  isTopTier: true,
+  employeeCount: 2000
+}............
+
+
 48. Find companies not offering WFH.
+Ans:- 
+
+code:-db.companies.find({"benefits":{$ne:'WFH'}});
+response:- {
+  _id: ObjectId('68b6cd01b511a8b8d376c43e'),
+  name: 'Microsoft',
+  location: 'Hyderabad',
+  salaryBand: {
+    base: 32,
+    stock: 15
+  },
+  hiringCriteria: {
+    cgpa: 8,
+    skills: [
+      'DSA',
+      'C#',
+      'System Design'
+    ],
+    experience: '1-3 years'
+  },
+  interviewRounds: [
+    {
+      round: 1,
+      type: 'OA'
+    },
+    {
+      round: 2,
+      type: 'Technical'
+    },
+    {
+      round: 3,
+      type: 'Managerial'
+    },
+    {
+      round: 4,
+      type: 'HR'
+    }
+  ],
+  benefits: [
+    'Health Insurance',
+    'Stock Options',
+    'Free Snacks'
+  ],
+  employeeCount: 3000
+}
+
+
 49. Find companies with > 3 benefits.
+
+Ans:- 
+
+code:- db.companies.find({ "benefits.3": { $exists: true } })
+response:- no object blank
+
+
+
 50. Find companies with exactly 4 interview rounds.
+Ans:- 
+
+code:- db.companies.find({ interviewRounds: { $size: 4 } });
+response:- {
+  _id: ObjectId('68b6cd01b511a8b8d376c43e'),
+  name: 'Microsoft',
+  location: 'Hyderabad',
+  salaryBand: {
+    base: 32,
+    stock: 15
+  },
+  hiringCriteria: {
+    cgpa: 8,
+    skills: [
+      'DSA',
+      'C#',
+      'System Design'
+    ],
+    experience: '1-3 years'
+  },
+  interviewRounds: [
+    {
+      round: 1,
+      type: 'OA'
+    },
+    {
+      round: 2,
+      type: 'Technical'
+    },
+    {
+      round: 3,
+      type: 'Managerial'
+    },
+    {
+      round: 4,
+      type: 'HR'
+    }
+  ],
+  benefits: [
+    'Health Insurance',
+    'Stock Options',
+    'Free Snacks'
+  ],
+  employeeCount: 3000
+}
+
 51. Find companies where employeeCount > 2000.
+
+Ans:- 
+
+code:- 
+response:- 
+
 52. Find companies offering salaries in multiples of 5.
 53. Find companies where CGPA is in \[6.5, 7.0, 7.5].
 54. Find companies not in Bangalore.
