@@ -1184,15 +1184,292 @@ response:- {
 
 Ans:- 
 
-code:- 
-response:- 
+code:- db.companies.find({"employeeCount":{$gt:2000}});
+response:- {
+  _id: ObjectId('68b6cd01b511a8b8d376c43e'),
+  name: 'Microsoft',
+  location: 'Hyderabad',
+  salaryBand: {
+    base: 32,
+    stock: 15
+  },
+  hiringCriteria: {
+    cgpa: 8,
+    skills: [
+      'DSA',
+      'C#',
+      'System Design'
+    ],
+    experience: '1-3 years'
+  },
+  interviewRounds: [
+    {
+      round: 1,
+      type: 'OA'
+    },
+    {
+      round: 2,
+      type: 'Technical'
+    },
+    {
+      round: 3,
+      type: 'Managerial'
+    },
+    {
+      round: 4,
+      type: 'HR'
+    }
+  ],
+  benefits: [
+    'Health Insurance',
+    'Stock Options',
+    'Free Snacks'
+  ],
+  employeeCount: 3000
+}............
 
 52. Find companies offering salaries in multiples of 5.
+
+Ans:- 
+
+code:- db.companies.find({"salaryBand.base":{$mod:[5,0]}});
+response:- {
+  _id: ObjectId('68b6cd01b511a8b8d376c441'),
+  name: 'Netflix',
+  location: 'Mumbai',
+  salaryBand: {
+    base: 50,
+    stock: 1
+  },
+  hiringCriteria: {
+    cgpa: 7,
+    skills: [
+      'Java',
+      'DSA',
+      'Microservices'
+    ],
+    experience: '2-4 years'
+  },
+  interviewRounds: [
+    {
+      round: 1,
+      type: 'Technical'
+    },
+    {
+      round: 2,
+      type: 'System Design'
+    },
+    {
+      round: 3,
+      type: 'Managerial'
+    }
+  ],
+  benefits: [
+    'Stock Options',
+    'Free Streaming',
+    'WFH'
+  ],
+  employeeCount: 800
+}
+
+
 53. Find companies where CGPA is in \[6.5, 7.0, 7.5].
+
+Ans:-
+
+
+code:- db.companies.find({"hiringCriteria.cgpa":{$in:[6.5,7.0,7.5]}});
+resorses:- {
+  _id: ObjectId('68b6cd01b511a8b8d376c442'),
+  name: 'Adobe',
+  location: 'Noida',
+  salaryBand: {
+    base: 26,
+    stock: 8
+  },
+  hiringCriteria: {
+    cgpa: 7,
+    skills: [
+      'DSA',
+      'OOPS',
+      'C++'
+    ],
+    experience: '0-2 years'
+  },
+  interviewRounds: [
+    {
+      round: 1,
+      type: 'OA'
+    },
+    {
+      round: 2,
+      type: 'Technical'
+    },
+    {
+      round: 3,
+      type: 'HR'
+    }
+  ],
+  benefits: [
+    'Health Insurance',
+    'WFH'
+  ],
+  employeeCount: 1800
+}
+
+
 54. Find companies not in Bangalore.
+
+Ans:- 
+
+code:- db.companies.find({location:"Bangalore"});
+resorses:- {
+  _id: ObjectId('68b6cd01b511a8b8d376c43f'),
+  name: 'Meta',
+  location: 'Bangalore',
+  salaryBand: {
+    base: 37,
+    stock: 20
+  },
+  hiringCriteria: {
+    cgpa: 8.5,
+    skills: [
+      'DSA',
+      'React',
+      'System Design'
+    ],
+    experience: '1-3 years'
+  },
+  interviewRounds: [
+    {
+      round: 1,
+      type: 'OA'
+    },
+    {
+      round: 2,
+      type: 'DSA'
+    },
+    {
+      round: 3,
+      type: 'System Design'
+    },
+    {
+      round: 4,
+      type: 'Culture Fit'
+    },
+    {
+      round: 5,
+      type: 'CTO Interview'
+    }
+  ],
+  benefits: [
+    'Stock Options',
+    'Health Insurance',
+    'Free Meals'
+  ],
+  employeeCount: 1500
+}
+
+
 55. Use regex to find skills ending in "Design".
+Ans:- 
+
+code:- db.companies.find({ "hiringCriteria.skills": { $regex: /Design$/ } });
+resourses:- {
+  _id: ObjectId('68b6cd01b511a8b8d376c43e'),
+  name: 'Microsoft',
+  location: 'Hyderabad',
+  salaryBand: {
+    base: 32,
+    stock: 15
+  },
+  hiringCriteria: {
+    cgpa: 8,
+    skills: [
+      'DSA',
+      'C#',
+      'System Design'
+    ],
+    experience: '1-3 years'
+  },
+  interviewRounds: [
+    {
+      round: 1,
+      type: 'OA'
+    },
+    {
+      round: 2,
+      type: 'Technical'
+    },
+    {
+      round: 3,
+      type: 'Managerial'
+    },
+    {
+      round: 4,
+      type: 'HR'
+    }
+  ],
+  benefits: [
+    'Health Insurance',
+    'Stock Options',
+    'Free Snacks'
+  ],
+  employeeCount: 3000
+}.......
+
+
 56. Use regex to find companies starting with "A".
+Ans:- 
+
+code:- db.companies.find({name:{$regex:/^A/}})
+resourses:- {
+  _id: ObjectId('68b6cd01b511a8b8d376c442'),
+  name: 'Adobe',
+  location: 'Noida',
+  salaryBand: {
+    base: 26,
+    stock: 8
+  },
+  hiringCriteria: {
+    cgpa: 7,
+    skills: [
+      'DSA',
+      'OOPS',
+      'C++'
+    ],
+    experience: '0-2 years'
+  },
+  interviewRounds: [
+    {
+      round: 1,
+      type: 'OA'
+    },
+    {
+      round: 2,
+      type: 'Technical'
+    },
+    {
+      round: 3,
+      type: 'HR'
+    }
+  ],
+  benefits: [
+    'Health Insurance',
+    'WFH'
+  ],
+  employeeCount: 1800
+}.................
+
+
 57. Case-insensitive search for "amazon".
+
+Ans:- 
+
+code:-db.commpanies.find({})
+resoursses:-
+
+
 58. Find companies where `salaryBand.stock` exists.
 59. Find companies where `perks` does NOT exist.
 60. Find companies where `salaryBand.base` is of type number.
