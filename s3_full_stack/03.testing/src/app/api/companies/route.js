@@ -1,4 +1,3 @@
-// app/api/companies/route.js
 import clientPromise from '../../lib/mongodb';
 import { NextResponse } from 'next/server';
 
@@ -12,8 +11,8 @@ export async function GET(request) {
     const skill = url.searchParams.get('skill');
 
     const client = await clientPromise;
-    const db = client.db();
-    const coll = db.collection('workbook');
+    const db = client.db("test"); 
+    const coll = db.collection('companies');
 
     const filter = {};
     if (name) filter.name = { $regex: new RegExp(name, 'i') };
@@ -21,6 +20,7 @@ export async function GET(request) {
     if (skill) filter['hiringCriteria.skills'] = { $in: [skill] };
 
     const items = await coll.find(filter).skip(skip).limit(limit).toArray();
+
     return NextResponse.json({ count: items.length, items }, { status: 200 });
   } catch (err) {
     console.error('GET /api/companies error:', err);
