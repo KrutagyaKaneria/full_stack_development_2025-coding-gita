@@ -7,6 +7,7 @@ export async function GET(request) {
     const name = url.searchParams.get('name');
 
     const client = await clientPromise;
+
     const db = client.db(process.env.MONGODB_DB || "test");
     const coll = db.collection('companies');
 

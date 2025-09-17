@@ -11,8 +11,10 @@ export async function GET(request, { params }) {
     }
 
     const client = await clientPromise;
+
     const db = client.db(process.env.MONGODB_DB || "test");
     const coll = db.collection('companies');
+
 
     const company = await coll.findOne({ _id: new ObjectId(id) });
     if (!company) return NextResponse.json({ error: 'Not Found' }, { status: 404 });
